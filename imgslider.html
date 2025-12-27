@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+<style>
+    .container{
+        display: flex;
+        justify-content: center;
+        align-content: center;
+    }
+    .item{
+        width: 400px;
+        height: 400px;
+        border: 1px solid;
+        overflow: hidden;
+    }
+    .slides{
+        display: flex;
+        transition: transform 0.5s ease;
+    }
+    .slides img{
+        width: 400px;
+        height: 400px;
+        object-fit: cover;
+    }
+    .align{
+        display: flex;
+        justify-content: center;
+    }
+    button{
+        width: 200px;
+        height: 30px;
+        background-color: blue;
+        color: white;
+        border: none;
+        margin: 1px;
+        cursor: pointer;
+    }
+    button:hover{
+        width: 210px;
+        height: 35px;
+        transform: scale(1.5px);
+    }
+</style>    
+</head>
+<body>
+    <div class="container">
+        <div class="item">
+            <div class="slides">
+                <img src="https://vulplex.com/images/featured/Crayon-Shinchan-Playful-Adventures-in-HD-Wallpaper-Bliss-64fc2b1c66b2c.webp">
+                <img src="https://vulplex.com/images/featured/Shinchan-Nohara-in-Mesmerizing-4K-Wallpaper-Image-64fc2f5d1ca4d.webp">
+                <img src="https://vulplex.com/images/featured/Cheerful-Shinchan-Jumps-into-Action-with-a-Skipping-Rope-HD-Wallpaper-64fc2e4defd1d.webp">
+            </div>
+        </div>
+    </div>
+    <div class="align">
+        <button class="btn1">Previous</button>
+        <button class="btn2">Next</button>
+    </div>
+<script>
+    //selecting Elements
+        const preV = document.querySelector(".btn1") 
+        const nextO = document.querySelector(".btn2")
+        const slides = document.querySelector(".slides");
+
+        //initializing
+        let img = 3
+        let start = 0;
+
+        //logic
+        function slide() {
+            slides.style.transform = `translateX(${-400 * start}px)`
+           start++
+           if(start >= img){
+            start=0
+           }
+        }
+        slide()
+        let interval = setInterval(slide, 2000);
+
+        // applying Events for buttons
+        nextO.addEventListener("click", ()=>{
+            clearInterval(interval)
+            start++;
+            if(start >= img){
+                 start = 0
+            }
+            slides.style.transform = `translateX(${-400 * start}px)`
+            interval=setInterval(slide,2000)
+        })
+        
+        preV.addEventListener("click", ()=>{
+            clearInterval(interval);
+            start--;
+            if(start < 0) {
+                start = img - 1
+            }
+            slides.style.transform = `translateX(${-400 * start}px)`
+            interval=setInterval(slide,2000)
+        })
+        
+</script>
+
+</body>
+</html>

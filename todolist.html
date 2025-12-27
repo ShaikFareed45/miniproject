@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO DO LIST</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .contain{
+            background-color: rgb(3, 3, 14);
+            display: flex;
+            justify-content: center;
+            height: 96vh;
+            
+        }
+        .item{
+            color: white;
+            border: none;
+            border-radius: 20px;
+            height: 500px;
+            width: 480px;
+            background-color: rgb(33, 33, 33);
+            text-align: center;
+            margin: 20px;
+        }
+        .head{
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        input{
+            width: 72%;
+            height: 28px;
+            border-radius: 5px;
+            border: none;
+            padding: 5px;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-weight: bolder;
+        }
+        #butt{
+            height: 38px;
+            width: 100px;
+            border-radius: 5px;
+            border: none;
+            background-color: rgb(230, 176, 77);
+            font-weight: bolder;
+            cursor: pointer;
+        }
+        .item1,.item2,.item3,.item4,.item5{
+            border: 1px solid;
+            width: 96%;
+            height: 40px;
+            margin: 10px;
+            background-color: white;
+            border-radius: 5px;     
+        }
+        .edit,.remove,.crt{
+            height: 40px;
+            width: 10%;
+            cursor: pointer;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .align{
+            display: flex;
+            justify-content: end;
+            gap: 5px;
+        }
+        span{
+            color: black;
+            margin-right: 80px;
+            display: inline;
+            align-content: center;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="contain">
+        <div class="item">
+            <h1 class="head">To Do List</h1>
+            <input type="text" name="" id="" placeholder="Make Your List">
+            <button id="butt">Add</button>
+        </div>
+    </div>
+    <script>
+        //selecting the elements
+         const btn = document.getElementById("butt")
+        const inp = document.querySelector("input")
+        const parDiv = document.querySelector(".contain")
+        const chiDiv = document.querySelector(".item")
+        btn.addEventListener("click",(e)=>{
+            const firstDiv = document.createElement("div")
+            firstDiv.setAttribute("class","item1")
+            chiDiv.appendChild(firstDiv)
+            const secDiv = document.createElement("div")
+            secDiv.setAttribute("class","align")
+            firstDiv.appendChild(secDiv)
+            const span = document.createElement("span")
+            secDiv.appendChild(span)
+            const ediBtn = document.createElement("button")
+            const removeBtn = document.createElement("button")
+            secDiv.appendChild(ediBtn).style.backgroundColor="gray"
+            secDiv.appendChild(removeBtn).style.backgroundColor="red"
+            ediBtn.setAttribute("class","edit")
+            removeBtn.setAttribute("class","remove")
+            ediBtn.innerHTML=`<i class="fa-solid fa-pencil"></i>`
+            removeBtn.innerHTML=`<i class="fa-solid fa-xmark"></i>`
+// logic
+            span.textContent =`${inp.value}`
+            inp.value= "" 
+
+            
+            ediBtn.addEventListener("click",()=>{
+                document.querySelector("span")
+                spVal = span.textContent
+                inp.value = spVal
+                const crtBtn = document.createElement("button")
+                secDiv.appendChild(crtBtn)
+                crtBtn.innerHTML=`<i class="fa-solid fa-check"></i>`
+                crtBtn.setAttribute("class","crt")
+                
+               crtBtn.addEventListener("click",(e)=>{
+                span.textContent = inp.value
+                inp.value= "" 
+                crtBtn.style.display="none"
+               })
+
+                
+            })
+            removeBtn.addEventListener("click",()=>{
+                firstDiv.remove()
+                inp.value= "" 
+            })
+            }
+        )        
+       
+    </script>
+    
+</body>
+</html>
